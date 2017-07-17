@@ -11,22 +11,49 @@ import {
   View
 } from 'react-native';
 
-import { Text, Button, ActionSheet, Container } from 'native-base';
+import {
+  Container,
+  Header,
+  Left,
+  Button,
+  Body,
+  Title,
+  Icon,
+  Right,
+  Content,
+  ActionSheet,
+  Text
+} from "native-base";
 
 var BUTTONS = ["Option 0", "Option 1", "Option 2", "Delete", "Cancel"];
 var DESTRUCTIVE_INDEX = 3;
 var CANCEL_INDEX = 4;
 
 export default class NativeBaseTest extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     return (
       <Container>
-       <View style={styles.container}>
-        <Text>
-          Welcome back to React Native!
-        </Text>
-
-        <Button
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("DrawerOpen")}
+            >
+              
+            </Button>
+          </Left>
+          <Body>
+            <Title>ActionSheet</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content padder>
+          <Button
             onPress={() =>
               ActionSheet.show(
                 {
@@ -41,10 +68,9 @@ export default class NativeBaseTest extends Component {
               )}
           >
             <Text>Actionsheet</Text>
-          </Button>        
-        
-      </View>         
-      </Container>
+          </Button>
+        </Content>
+      </Container>      
     );
   }
 }
