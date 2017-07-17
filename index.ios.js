@@ -11,21 +11,40 @@ import {
   View
 } from 'react-native';
 
-import { Text, Button } from 'native-base';
+import { Text, Button, ActionSheet, Container } from 'native-base';
+
+var BUTTONS = ["Option 0", "Option 1", "Option 2", "Delete", "Cancel"];
+var DESTRUCTIVE_INDEX = 3;
+var CANCEL_INDEX = 4;
 
 export default class NativeBaseTest extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
+       <View style={styles.container}>
         <Text>
           Welcome back to React Native!
         </Text>
-        <Button>
-          <Text>Press Me!</Text>
-        </Button>
+
+        <Button
+            onPress={() =>
+              ActionSheet.show(
+                {
+                  options: BUTTONS,
+                  cancelButtonIndex: CANCEL_INDEX,
+                  destructiveButtonIndex: DESTRUCTIVE_INDEX,
+                  title: "Testing ActionSheet"
+                },
+                buttonIndex => {
+                  this.setState({ clicked: BUTTONS[buttonIndex] });
+                }
+              )}
+          >
+            <Text>Actionsheet</Text>
+          </Button>        
         
-        
-      </View>
+      </View>         
+      </Container>
     );
   }
 }
